@@ -1,3 +1,6 @@
+import { initializeApp, getApps } from 'firebase/app';
+import { getAuth } from 'firebase/auth';
+
 export const firebaseConfig = {
   apiKey: "AIzaSyACGnGZ3RAW7q2eMibZGWdoHkyfatUwdlw",
   authDomain: "golazo-ec-7df8c.firebaseapp.com",
@@ -7,3 +10,11 @@ export const firebaseConfig = {
   appId: "1:155448093114:web:abf2c4be66ffbbc4c49583",
   measurementId: "G-LP6R7L293V"
 };
+
+if (!getApps().length) {
+  initializeApp(firebaseConfig);
+}
+
+const auth = getAuth();
+
+export { auth };
