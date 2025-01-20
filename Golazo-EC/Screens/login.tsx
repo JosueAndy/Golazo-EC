@@ -4,7 +4,7 @@ import { initializeApp } from 'firebase/app';
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth';
 import { firebaseConfig } from '../firebase-config';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
-import { RootStackParamList } from '../App'; // Asegúrate de ajustar la ruta si es necesario
+import { RootStackParamList } from '../App';
 
 type Props = NativeStackScreenProps<RootStackParamList, 'Login'>;
 

@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Text, Button, StyleSheet, Alert } from 'react-native';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
-import { RootStackParamList } from '../App'; // Asegúrate de ajustar la ruta si es necesario
+import { RootStackParamList } from '../App';
 import { getAuth, signOut } from 'firebase/auth';
 
 type Props = NativeStackScreenProps<RootStackParamList, 'Home'>;
@@ -11,9 +11,9 @@ const HomeScreen: React.FC<Props> = ({ navigation }) => {
 
   const handleLogout = async () => {
     try {
-      await signOut(auth); // Cerrar sesión con Firebase
+      await signOut(auth); 
       Alert.alert('Logout Successful', 'You have been logged out.');
-      navigation.replace('Login'); // Redirigir al usuario a la pantalla de Login
+      navigation.replace('Login');
     } catch (error) {
       Alert.alert('Logout Failed', (error as Error).message);
     }
