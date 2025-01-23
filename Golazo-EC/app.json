@@ -13,7 +13,8 @@
       "backgroundColor": "#ffffff"
     },
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.josueandy.GolazoEC"
     },
     "android": {
       "adaptiveIcon": {
@@ -25,6 +26,9 @@
     "web": {
       "favicon": "./assets/favicon.png"
     },
+    
+    "scheme": "josueandy.GolazoEC",
+
     "extra": {
       "eas": {
         "projectId": "e90f8ce2-a6ec-451a-89f4-d4480dfa3120"
