@@ -1,12 +1,13 @@
 {
   "expo": {
-    "name": "Golazo-EC",
+    "name": "GolazoEC",
     "slug": "Golazo-EC",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
     "newArchEnabled": true,
+    "scheme": "golazoec",
     "splash": {
       "image": "./assets/splash-icon.png",
       "resizeMode": "contain",
@@ -14,21 +15,18 @@
     },
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.josueandy.GolazoEC"
+      "bundleIdentifier": "com.josueandy.golazoec"
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
-      "package": "com.josueandy.GolazoEC"
+      "package": "com.josueandy.golazoec"
     },
     "web": {
       "favicon": "./assets/favicon.png"
     },
-    
-    "scheme": "josueandy.GolazoEC",
-
     "extra": {
       "eas": {
         "projectId": "e90f8ce2-a6ec-451a-89f4-d4480dfa3120"
