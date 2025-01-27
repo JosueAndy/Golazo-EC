@@ -19,18 +19,14 @@ const App: React.FC = () => {
           name="Login" 
           component={LoginScreen} 
           options={{
-            headerShown: false, // Ocultar encabezado para Login
+            headerShown: false
           }} 
         />
         <Stack.Screen 
           name="Home" 
           component={HomeScreen} 
           options={{
-            title: 'Home', // Título para la pantalla Home
-            headerStyle: {
-              backgroundColor: '#6200ee', // Color del encabezado
-            },
-            headerTintColor: '#fff', // Color del texto del encabezado
+            headerShown: false
           }} 
         />
       </Stack.Navigator>
