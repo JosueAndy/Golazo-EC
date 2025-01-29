@@ -5,8 +5,9 @@ import { RootStackParamList } from '../App'; // Ajusta la ruta si es necesario
 import { getAuth, onAuthStateChanged, signOut } from 'firebase/auth';
 import { GoogleSignin } from '@react-native-google-signin/google-signin';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import * as WebBrowser from 'expo-web-browser';
 
-
+WebBrowser.maybeCompleteAuthSession();
 type Props = NativeStackScreenProps<RootStackParamList, 'Home'>;
 
 const HomeScreen: React.FC<Props> = ({ navigation }) => {
@@ -40,14 +41,11 @@ const HomeScreen: React.FC<Props> = ({ navigation }) => {
 
   const getLocalUser = async () => {
       try {
-        setLoading(true)
         const data = await AsyncStorage.getItem('@user');
         if(!data) return null;
         return JSON.parse(data);
       }catch(e) {
         console.log(e, 'Error getting local user')
-      } finally {
-        setLoading(false);
       }
     }
 
@@ -108,9 +106,6 @@ const HomeScreen: React.FC<Props> = ({ navigation }) => {
           )}
           <Text style={styles.text}>Welcome {userInfo.name || 'User'}</Text>
           <Text style={styles.email}>{userInfo.email}</Text>
-          {userInfo.email_verified && (
-            <Text style={styles.text}>Email Verified</Text>
-          )}
         </View>
       )}
       <Button title="Log Out" onPress={handleLogout} />

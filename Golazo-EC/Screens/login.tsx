@@ -1,49 +1,36 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, TextInput, Button, StyleSheet, Alert, ActivityIndicator, Image } from 'react-native';
+import { View, Text, TextInput, Button, StyleSheet, Alert, ActivityIndicator } from 'react-native';
 import { initializeApp } from 'firebase/app';
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, GoogleAuthProvider, signInWithCredential, onAuthStateChanged } from 'firebase/auth';
+import { getAuth, signInWithEmailAndPassword, GoogleAuthProvider, signInWithCredential } from 'firebase/auth';
 import { firebaseConfig } from '../firebase-config';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
-import { RootStackParamList } from '../App'; // Asegúrate de ajustar la ruta si es necesario
+import { RootStackParamList } from '../App';
 import * as WebBrowser from 'expo-web-browser';
 import * as Google from 'expo-auth-session/providers/google';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import { googleAuthConfig } from '../config';
+
 
 WebBrowser.maybeCompleteAuthSession();
 type Props = NativeStackScreenProps<RootStackParamList, 'Login'>;
 
-// type UserInfo = {
-//   picture: string;
-//   email: string;
-//   email_verified: boolean;
-//   name: string;
-// };
-
-
 const LoginScreen: React.FC<Props> = ({ navigation }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  // const [userInfo, setUserInfo] = React.useState<UserInfo | null>(null);
-  const [request, response, promptAsyn] = Google.useAuthRequest({
-    webClientId: '523537409192-qsdp95lcn7nblht5a3iqas7gisr2ivpq.apps.googleusercontent.com',
-    androidClientId:'523537409192-9kt6g6lsml82n20radf5npi04a4u4rqq.apps.googleusercontent.com'
+  const [loading, setLoading] = useState(false);
+  const [request, response, PromptAsync] = Google.useAuthRequest({
+    webClientId: googleAuthConfig.webClientId,
+    androidClientId: googleAuthConfig.androidClientId
   });
   
   const app = initializeApp(firebaseConfig);
   const auth = getAuth(app);
 
   const handleCreateAccount = () => {
-    createUserWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
-        const user = userCredential.user;
-        Alert.alert('Account Created', `Welcome ${user.email}`);
-      })
-      .catch((error) => {
-        Alert.alert('Account Creation Failed', error.message);
-      });
+    navigation.navigate('CreateAccount')
   };
 
   const handleSignIn = () => {
+    setLoading(true)
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         const user = userCredential.user;
@@ -52,6 +39,9 @@ const LoginScreen: React.FC<Props> = ({ navigation }) => {
       })
       .catch((error) => {
         Alert.alert('Login Failed', error.message);
+      })
+      .finally(() => {
+        setLoading(false)
       });
   };
 
@@ -59,9 +49,21 @@ const LoginScreen: React.FC<Props> = ({ navigation }) => {
     if (response?.type == "success"){
       const { id_token } = response.params;
       const credential = GoogleAuthProvider.credential(id_token);
-      signInWithCredential(auth, credential);
-    };
+      setLoading(true);
+      signInWithCredential(auth, credential)
+        .then((userCredential) => {
+        const user = userCredential.user;
+        navigation.navigate('Home');
+      })
+      .catch((error) =>{
+        Alert.alert('Login Failed', error.message)
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+    }
   }, [response]);
+
 
   return (
     <View style={styles.container}>
@@ -82,7 +84,8 @@ const LoginScreen: React.FC<Props> = ({ navigation }) => {
       />
       <Button title="Login" onPress={handleSignIn} />
       <Button title="Create Account" onPress={handleCreateAccount} />
-      <Button title="Log in Google" onPress={async () => { await promptAsyn(); navigation.navigate('Home'); }} />
+      <Button title="Log in Google" onPress={async () => { await PromptAsync() }} />
+      {loading && <ActivityIndicator size={"large"} color="#0000ff" />}
     </View>
   );
 };
@@ -121,3 +124,5 @@ const styles = StyleSheet.create({
 });
 
 export default LoginScreen;
+
+

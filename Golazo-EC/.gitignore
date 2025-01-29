@@ -38,3 +38,6 @@ yarn-error.*
 # android/ios
 /android
 /ios
+
+#config
+config.ts

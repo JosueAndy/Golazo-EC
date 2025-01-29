@@ -7,7 +7,7 @@
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
     "newArchEnabled": true,
-    "scheme": "golazoec",
+    "scheme": ["golazoec","fb1728161531247897"],
     "splash": {
       "image": "./assets/splash-icon.png",
       "resizeMode": "contain",
