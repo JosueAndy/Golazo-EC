@@ -3,10 +3,14 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import LoginScreen from './Screens/login';
 import HomeScreen from './Screens/home';
+import CreateAccountScreen from './Screens/createAccount';
+import StartScreen from './Screens/start';
 
 export type RootStackParamList = {
-  Login: undefined; // No se esperan parámetros en la pantalla de Login
-  Home: undefined;  // No se esperan parámetros en la pantalla de Home
+  Login: undefined;
+  Home: undefined; 
+  CreateAccount: undefined;
+  Start: undefined;
 };
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
@@ -14,24 +18,31 @@ const Stack = createNativeStackNavigator<RootStackParamList>();
 const App: React.FC = () => {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="Login">
+      <Stack.Navigator initialRouteName="Start">
+        <Stack.Screen
+          name="Start"
+          component={StartScreen}
+          options={{
+            headerShown: false
+          }}
+          />
         <Stack.Screen 
           name="Login" 
           component={LoginScreen} 
           options={{
-            headerShown: false, // Ocultar encabezado para Login
+            headerShown: false
           }} 
         />
         <Stack.Screen 
           name="Home" 
           component={HomeScreen} 
           options={{
-            title: 'Home', // Título para la pantalla Home
-            headerStyle: {
-              backgroundColor: '#6200ee', // Color del encabezado
-            },
-            headerTintColor: '#fff', // Color del texto del encabezado
+            headerShown: false
           }} 
+        />
+        <Stack.Screen
+          name='CreateAccount'
+          component={CreateAccountScreen}
         />
       </Stack.Navigator>
     </NavigationContainer>
