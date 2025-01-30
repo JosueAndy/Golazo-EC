@@ -2,12 +2,12 @@ import React, { useState, useEffect } from 'react';
 import { View, Text, TextInput, Button, StyleSheet, Alert, ActivityIndicator } from 'react-native';
 import { initializeApp } from 'firebase/app';
 import { getAuth, signInWithEmailAndPassword, GoogleAuthProvider, signInWithCredential } from 'firebase/auth';
-import { firebaseConfig } from '../firebase-config';
+import { firebaseConfig } from '../../firebase-config';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
-import { RootStackParamList } from '../App';
+import { RootStackParamList } from '../../App';
 import * as WebBrowser from 'expo-web-browser';
 import * as Google from 'expo-auth-session/providers/google';
-import { googleAuthConfig } from '../config';
+import { googleAuthConfig } from '../../config';
 
 
 WebBrowser.maybeCompleteAuthSession();
@@ -35,7 +35,7 @@ const LoginScreen: React.FC<Props> = ({ navigation }) => {
       .then((userCredential) => {
         const user = userCredential.user;
         Alert.alert('Login Success', `Welcome ${user.email}`);
-        navigation.replace('Home');
+        navigation.replace('SelectTeam');
       })
       .catch((error) => {
         Alert.alert('Login Failed', error.message);
@@ -53,7 +53,7 @@ const LoginScreen: React.FC<Props> = ({ navigation }) => {
       signInWithCredential(auth, credential)
         .then((userCredential) => {
         const user = userCredential.user;
-        navigation.navigate('Home');
+        navigation.navigate('SelectTeam');
       })
       .catch((error) =>{
         Alert.alert('Login Failed', error.message)

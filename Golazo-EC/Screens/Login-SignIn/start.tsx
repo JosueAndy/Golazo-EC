@@ -1,6 +1,6 @@
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
-import { RootStackParamList } from "../App";
-import { View, Text, Button, StyleSheet } from "react-native";
+import { RootStackParamList } from "../../App";
+import { View, Button, StyleSheet } from "react-native";
 
 type Props = NativeStackScreenProps<RootStackParamList, 'Start'>;
 

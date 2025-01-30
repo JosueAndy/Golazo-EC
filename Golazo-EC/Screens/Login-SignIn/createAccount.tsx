@@ -2,7 +2,7 @@ import { getAuth, createUserWithEmailAndPassword, updateProfile } from 'firebase
 import { Alert, View, Text, TextInput, Button, StyleSheet, ActivityIndicator } from 'react-native';
 import * as WebBrowser from 'expo-web-browser';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
-import { RootStackParamList } from '../App';
+import { RootStackParamList } from '../../App';
 import React, { useState } from 'react';
 
 WebBrowser.maybeCompleteAuthSession();
@@ -128,6 +128,7 @@ const styles = StyleSheet.create({
   text: {
     fontSize: 16,
   },
+
 });
 
 export default CreateAccountScreen;
